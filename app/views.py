@@ -42,7 +42,7 @@ def category(request, id=None):
         Category.objects.get(id=id).delete()
         Category.arrangeAscZIndex()
 
-    if request.method == 'PATCH':
+    if request.method == 'PUT':
         dropId = int(request.GET['dropId'])
         dragId = int(request.GET['dragId'])
         Category.changeZIndex(dropId, dragId)

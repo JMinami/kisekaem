@@ -255,7 +255,7 @@ function putCategoryZIndex(event){
     };
     const qs = new URLSearchParams(body);
     const param = {
-      method: 'patch',
+      method: 'PUT',
       headers: headers,
     };
 
@@ -531,7 +531,7 @@ function drawAvatar(avatars){
           for(let i=0; i < avatarNumber;i++){
             ctx.drawImage(image[i],0,0,canvas.width, canvas.height);
           }
-        },10);
+        },20);
       }
     }
   })
