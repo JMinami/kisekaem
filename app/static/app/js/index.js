@@ -463,10 +463,11 @@ function displayAllCategories(){
     getCategories()
       .then((categories)=>{
         const categoryArray = [];
+        const preUri = getPreUri();
         for(let category of categories){
           d = {
             'id': `category_${category.pk}`,
-            'c_picture': `./${category.fields.c_picture}`,
+            'c_picture': `${preUri}/${category.fields.c_picture}`,
           };
           categoryArray.push(d);
         }
@@ -483,10 +484,11 @@ function displaySelectPart(){
     getParts()
       .then((parts)=>{
         const partArray = [];
+        const preUri = getPreUri();
         for(let part of parts){
           d = {
             'id': `part_${part.pk}`,
-            'p_picture': `./${part.fields.p_picture}`,
+            'p_picture': `${preUri}/${part.fields.p_picture}`,
             'p_selected': part.fields.p_selected,
           };
           partArray.push(d);
