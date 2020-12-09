@@ -4,12 +4,21 @@ from django.http.response import JsonResponse
 from .models import Category, Part, Avatar
 from .forms import CategoryForm, PartForm, AvatarForm
 from django.core import serializers
+from django.conf import settings
 
 
 def index(request):
+    if settings.DEBUG:
+        debug = 1
+    else:
+        debug = 0
+    context = {
+        'debug': debug
+    }
     return render(
         request,
-        'app/index.html'
+        'app/index.html',
+        context
     )
 
 

@@ -7,6 +7,7 @@ const vmavatar = new Vue({
       avatars: [],
       imageType: "image/gif",
       showContent: false,
+      debug:"",
     },
     methods: {
       openModal: function(){
@@ -514,9 +515,11 @@ function drawAvatar(avatars){
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   const image = []
   const avatarNumber = avatars.length;
+  const preUri = getPreUri();
   avatars.forEach((avatar, index)=>{
     image[index] = new Image();
-    image[index].src = `./${avatar.p_picture}`;
+    image[index].src = `${preUri}${avatar.p_picture}`;
+    console.log(image[index].src);
     image[index].onload = function(){
       if(index >= avatarNumber-1){
         // 画像が消えてしまうバグ対策
@@ -524,12 +527,24 @@ function drawAvatar(avatars){
           for(let i=0; i < avatarNumber;i++){
             ctx.drawImage(image[i],0,0,canvas.width, canvas.height);
           }
-        },5);
+        },10);
       }
     }
   })
-}
+};
 
+
+function getPreUri(){
+  const debug = document.getElementById('debug').value;
+  let preUri;
+  if(debug == 1){
+    preUri = '.';
+  }else{
+    preUri = 'https://res.cloudinary.com/hxhagwkzr/image/upload/v1605454703'
+  }
+  return preUri;
+
+};
 // ドラッグ,ドロップされた画像のIDを返す
 function getDragIdAndDropId(event){
   let returnCode=true;
