@@ -544,7 +544,7 @@ function getPreUri(){
   if(debug == 1){
     preUri = '.';
   }else{
-    preUri = 'https://res.cloudinary.com/hxhagwkzr/image/upload/v1605454703'
+    preUri = 'https://res.cloudinary.com/hor1wrc5y/image/upload/v1607523416'
   }
   return preUri;
 
