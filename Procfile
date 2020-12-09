@@ -1,1 +1,1 @@
-web: gunicorn kisekae.wsgi --log-file -
+web: gunicorn kisekaem.wsgi --log-file -
