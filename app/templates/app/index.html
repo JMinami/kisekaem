@@ -1,0 +1,87 @@
+<html>
+
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'app/css/index.css' %}">
+    <title>kisekae</title>
+</head>
+<body>
+    <header>
+        <section class="selector" id="selector"></section>
+    </header>
+    <main>
+        <section class="top" id="top">
+            <header>
+                <div class="cmp">Avatar</div>
+            </header>
+            <section class="avatar_container" id="avatar_container">
+                <input type="hidden" id="avatar_number" :value="avatar_number">
+                <canvas id="avatar_canvas" class="avatar_canvas" width="600px" height="600px" ></canvas>
+            </section>
+            <section class="operation">
+                <input type="button" name="created" class="created" value="完成 !"
+                        @click="createdModalAvatar">
+                <div id="overlay" v-show="showContent" @click.self="closeModal">
+                    <div id="modal">
+                        <canvas id="modal_canvas" width="600px" height="600px"></canvas>
+                        <div id="conservation">
+                            <select v-model="imageType">
+                                <option value="image/jpeg">JPEG</option>
+                                <option value="image/gif">GIF</option>
+                                <option value="image/png">PNG</option>
+                            </select>
+                            <button @click="clickPreserve">保存</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+        <section class="setting" oncontextmenu="return false">
+            <div class="container">
+                <header>
+                    <div class="title">Categories</div>
+                </header>
+                <main id="category_container" 
+                        class="category_container"
+                        @dragover.stop.prevent="categoryContainerDragover"
+                        @dragleave.stop.prevent="categoryContainerDragleave"
+                        @drop.stop.prevent="categoryContainerDrop">
+                    <img v-for="category in categories"
+                        :id="category.id"
+                        :src="category.c_picture"
+                        @click="selectCategoryExecute"
+                        @click.right="deleteCategoryExecute"
+                        @dragstart.stop="categoryImgDragstart">
+                </main>
+            </div>
+            <div class="container">
+                <header>
+                    <div class="title">Parts</div>
+                </header>
+                <main id="part_container"
+                        class="part_container"
+                        @dragover.stop.prevent="partContainerDragover"
+                        @dragleave.stop.prevent="partContainerDragleave"
+                        @drop.stop.prevent="partContainerDrop">
+                    <input type="hidden" id="select_category" :value="selectCategory">
+                    <img v-for="part in parts"
+                        :id="part.id"
+                        :src="part.p_picture"
+                        :class="{ 'part_select': part.p_selected }" 
+                        @click="selectPartExecute"
+                        @click.right="deletePartExecute">
+                </main>
+            </div>
+        </section>
+    </main>
+    <footer></footer>
+</body>
+
+<div class="scripts">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    {% load static%}
+    <script src="{% static 'app/js/common.js' %}"></script>
+    <script src="{% static 'app/js/index.js' %}"></script>
+</div>
+
+</html>
