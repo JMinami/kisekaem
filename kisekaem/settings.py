@@ -30,8 +30,8 @@ STATICFILES_DIRS = (
 if not DEBUG:
     # SECRET_KEY = os.environ.get("SECRET_KEY")
     CLOUDINARY_STORAGE = {
-        'CLOUD_NAME': 'hxhagwkzr',
-        'API_KEY': '443663348831351',
+        'CLOUD_NAME': 'hor1wrc5y',
+        'API_KEY': '549574693446343',
         'API_SECRET': os.environ.get('API_SECRET'),
     }
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage' 
