@@ -522,8 +522,7 @@ function drawAvatar(avatars){
   const preUri = getPreUri();
   avatars.forEach((avatar, index)=>{
     image[index] = new Image();
-    image[index].src = `${preUri}${avatar.p_picture}`;
-    console.log(image[index].src);
+    image[index].src = `${avatar.p_picture}`;
     image[index].onload = function(){
       if(index >= avatarNumber-1){
         // 画像が消えてしまうバグ対策
@@ -567,7 +566,6 @@ function getDragIdAndDropId(event){
   }else{
     returnCode = true;
   }
-  console.log(returnCode)
   return {returnCode, dragId, dropId };
 };
 
