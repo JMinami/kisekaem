@@ -141,7 +141,9 @@ window.addEventListener("load", (e)=>{
   displayAllCategories()
     .then(()=>{
       // 選択カテゴリを初期値に設定
-      vmpart.selectCategory = getId(vmcategory.categories[0].id);
+      if(vmavatar.categories){
+        vmpart.selectCategory = getId(vmcategory.categories[0].id);
+      }
       displaySelectPart();
     })
 });
