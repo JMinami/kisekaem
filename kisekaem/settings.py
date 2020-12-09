@@ -14,7 +14,7 @@ import os
 import django_heroku
 import dj_database_url
 
-DEBUG = False
+DEBUG = True
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -32,7 +32,7 @@ if not DEBUG:
     CLOUDINARY_STORAGE = {
         'CLOUD_NAME': 'hor1wrc5y',
         'API_KEY': '549574693446343',
-        'API_SECRET': os.environ.get('API_SECRET'),
+        'API_SECRET': 'QPSY9HgiUsw2pOj-mUrtDkdhfw0',
     }
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage' 
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
