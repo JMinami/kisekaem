@@ -5,7 +5,7 @@ const vmavatar = new Vue({
     data: {
       avatar_number: 0,
       avatars: [],
-      imageType: "image/gif",
+      imageType: "image/jpeg",
       showContent: false,
       debug:"",
     },
@@ -141,9 +141,7 @@ window.addEventListener("load", (e)=>{
   displayAllCategories()
     .then(()=>{
       // 選択カテゴリを初期値に設定
-      if(vmavatar.categories){
-        vmpart.selectCategory = getId(vmcategory.categories[0].id);
-      }
+      vmpart.selectCategory = getId(vmcategory.categories[0].id);
       displaySelectPart();
     })
 });
@@ -517,25 +515,22 @@ function drawAvatar(avatars){
   const canvas = document.getElementById('avatar_canvas');
   const ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  const image = []
-  const avatarNumber = avatars.length;
-  const preUri = getPreUri();
+  const images = [];
+  const length = avatars.length;
+  console.log(length)
   avatars.forEach((avatar, index)=>{
-    image[index] = new Image();
-    image[index].src = `${avatar.p_picture}`;
-    image[index].onload = function(){
-      if(index >= avatarNumber-1){
-        // 画像が消えてしまうバグ対策
-        setTimeout(()=>{
-          for(let i=0; i < avatarNumber;i++){
-            ctx.drawImage(image[i],0,0,canvas.width, canvas.height);
-          }
-        },100);
+    images[index] = new Image();
+    images[index].src = `.${avatar.p_picture}`;
+    images[index].onload = function(){
+      if(index >= length - 1){
+        for(let i = 0; i < length;i++){
+          ctx.drawImage(images[i], 0, 0, canvas.width, canvas.height);
+          console.log(`${images[i].src},${i}`);
+        }
       }
     }
-  })
+  });
 };
-
 
 function getPreUri(){
   const debug = document.getElementById('debug').value;
@@ -574,4 +569,5 @@ function preserveAvatar(canvas, imageType){
   a.href = canvas.toDataURL(imageType);
   a.download = 'download.jpg';
   a.click();
+  a.remove();
 };
