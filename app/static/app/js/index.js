@@ -520,7 +520,7 @@ function drawAvatar(avatars){
   console.log(length)
   avatars.forEach((avatar, index)=>{
     images[index] = new Image();
-    images[index].crossOrigin
+    images[index].crossOrigin = "anonymous";
     images[index].onload = function(){
       if(index >= length - 1){
         for(let i = 0; i < length;i++){
