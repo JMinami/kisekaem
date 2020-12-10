@@ -520,7 +520,7 @@ function drawAvatar(avatars){
   console.log(length)
   avatars.forEach((avatar, index)=>{
     images[index] = new Image();
-    images[index].src = getAvatarUri(avatar);
+    images[index].crossOrigin
     images[index].onload = function(){
       if(index >= length - 1){
         for(let i = 0; i < length;i++){
@@ -529,6 +529,7 @@ function drawAvatar(avatars){
         }
       }
     }
+    images[index].src = getAvatarUri(avatar);
   });
 };
 
