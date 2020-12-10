@@ -520,7 +520,7 @@ function drawAvatar(avatars){
   console.log(length)
   avatars.forEach((avatar, index)=>{
     images[index] = new Image();
-    images[index].src = `.${avatar.p_picture}`;
+    images[index].src = getAvatarUri(avatar);
     images[index].onload = function(){
       if(index >= length - 1){
         for(let i = 0; i < length;i++){
@@ -531,6 +531,15 @@ function drawAvatar(avatars){
     }
   });
 };
+
+function getAvatarUri(avatar){
+  const debug = document.getElementById('debug').value;
+  if(debug == 1){
+    return `.${avatar.p_picture}`;
+  }else{
+    return avatar.p_picture;
+  }
+}
 
 function getPreUri(){
   const debug = document.getElementById('debug').value;
