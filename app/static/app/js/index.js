@@ -16,6 +16,10 @@ const vmavatar = new Vue({
       closeModal: function(){
         this.showContent = false;
       },
+      createNewAvatar: function(){
+        this.avatar_number+=1;
+        displayAvatar();
+      },
       createdModalAvatar: function(){
         const avatar_canvas = document.getElementById('avatar_canvas');
         const modal_canvas = document.getElementById('modal_canvas');
@@ -23,6 +27,12 @@ const vmavatar = new Vue({
         modal_ctx.clearRect(0, 0, modal_ctx.width, modal_ctx.height);
         modal_ctx.drawImage(avatar_canvas, 0, 0);
         this.openModal();
+      },
+      beforeAvatar: function(){
+        if(this.avatar_number > 0){
+          this.avatar_number -= 1;
+        }
+        displayAvatar();
       },
       clickPreserve: function(){
         const modal_canvas = document.getElementById('modal_canvas');
@@ -518,11 +528,13 @@ function drawAvatar(avatars){
   const images = [];
   const length = avatars.length;
   console.log(length)
+  let loadCound = 0;
   avatars.forEach((avatar, index)=>{
     images[index] = new Image();
     images[index].crossOrigin = "anonymous";
     images[index].onload = function(){
-      if(index >= length - 1){
+      loadCound += 1;
+      if(loadCound >= length - 1){
         for(let i = 0; i < length;i++){
           ctx.drawImage(images[i], 0, 0, canvas.width, canvas.height);
           console.log(`${images[i].src},${i}`);

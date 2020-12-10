@@ -20,8 +20,12 @@
                 <canvas id="avatar_canvas" class="avatar_canvas" width="600px" height="600px" ></canvas>
             </section>
             <section class="operation">
-                <input type="button" name="created" class="created" value="完成 !"
+                <input type="hidden" name="topbutton" class="topbutton" value="新規"
+                        @click="createNewAvatar">
+                <input type="button" name="topbutton" class="topbutton" value="完成 !"
                         @click="createdModalAvatar">
+                <input type="hidden" name="topbutton" class="topbutton" value="一個前"
+                        @click="beforeAvatar">
                 <div id="overlay" v-show="showContent" @click.self="closeModal">
                     <div id="modal">
                         <canvas id="modal_canvas" width="600px" height="600px"></canvas>
