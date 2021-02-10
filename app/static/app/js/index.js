@@ -7,7 +7,6 @@ const vmavatar = new Vue({
       avatars: [],
       imageType: "image/jpeg",
       showContent: false,
-      debug:"",
     },
     methods: {
       openModal: function(){
@@ -16,7 +15,7 @@ const vmavatar = new Vue({
       closeModal: function(){
         this.showContent = false;
       },
-      createNewAvatar: function(){
+      beforeAvatar: function(){
         this.avatar_number+=1;
         displayAvatar();
       },
@@ -28,10 +27,7 @@ const vmavatar = new Vue({
         modal_ctx.drawImage(avatar_canvas, 0, 0);
         this.openModal();
       },
-      beforeAvatar: function(){
-        if(this.avatar_number > 0){
-          this.avatar_number -= 1;
-        }
+      nextAvatar: function(){
         displayAvatar();
       },
       clickPreserve: function(){
@@ -151,8 +147,11 @@ window.addEventListener("load", (e)=>{
   displayAllCategories()
     .then(()=>{
       // 選択カテゴリを初期値に設定
-      vmpart.selectCategory = getId(vmcategory.categories[0].id);
-      displaySelectPart();
+      if(vmcategory.categories.length > 0){
+        vmpart.selectCategory = getId(vmcategory.categories[0].id);
+        displaySelectPart();
+      }
+
     })
 });
 
@@ -482,7 +481,7 @@ function displayAllCategories(){
           categoryArray.push(d);
         }
         // カテゴリー画像の表示
-        vmcategory.categories = categoryArray;
+        // vmcategory.categories = categoryArray;
         resolve();
       })
   })
@@ -527,7 +526,6 @@ function drawAvatar(avatars){
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   const images = [];
   const length = avatars.length;
-  console.log(length)
   let loadCound = 0;
   avatars.forEach((avatar, index)=>{
     images[index] = new Image();
@@ -537,7 +535,6 @@ function drawAvatar(avatars){
       if(loadCound >= length - 1){
         for(let i = 0; i < length;i++){
           ctx.drawImage(images[i], 0, 0, canvas.width, canvas.height);
-          console.log(`${images[i].src},${i}`);
         }
       }
     }

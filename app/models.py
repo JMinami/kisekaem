@@ -65,7 +65,6 @@ class Category(models.Model):
 class Part(models.Model):
     p_picture = models.ImageField(upload_to='images/part/')
     p_category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    p_selected = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.id)
@@ -112,3 +111,20 @@ class Avatar(models.Model):
         else:
             currentNumber = 0
         return currentNumber
+
+
+class OperateAvatarMemory(models.Model):
+    o_operation_number = models.PositiveIntegerField()
+    o_avater_number = models.PositiveIntegerField()
+    o_category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    o_part = models.ForeignKey(Part, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.id)
+
+
+class CurrentOperationNumber(models.Model):
+    c_operation_number = models.PositiveIntegerField()
+
+    def __str__(self):
+        return str(self.c_operation_number)
